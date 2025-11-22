@@ -15,10 +15,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
 import com.sopt.sopkathon_android1.presentation.community.CommunityScreen
-import com.sopt.sopkathon_android1.presentation.discussion.DiscussionScreen
 import com.sopt.sopkathon_android1.presentation.generate.GenerateScreen
 import com.sopt.sopkathon_android1.presentation.home.bottomNavi.BottomNavi
 import com.sopt.sopkathon_android1.presentation.home.bottomNavi.BottomNaviType
