@@ -1,3 +1,5 @@
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -5,10 +7,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -104,20 +109,37 @@ fun RowScope.VoteSection(
     isLeftArgs: Boolean,
     resultStatus: ResultStatus = ResultStatus.NONE
 ) {
-    // 배경색 결정: 선택되고 결과가 있을 때만 색상 적용
+    // 애니메이션을 위한 값 (0f: 채우지 않음, 1f: 100% 채움)
+    val fillProgress by animateFloatAsState(
+        targetValue = if (isSelected && resultStatus != ResultStatus.NONE) 1f else 0f,
+        animationSpec = tween(durationMillis = 800), // 800ms에 걸쳐 애니메이션
+        label = "VoteSectionFillAnimation"
+    )
+
+    // 배경색 결정
     val backgroundColor = when {
-        isSelected && resultStatus == ResultStatus.WIN -> SopkathonTheme.colors.blue_100 // 파란 색
-        isSelected && resultStatus == ResultStatus.LOSE -> SopkathonTheme.colors.subPink // 핑크 색
-        else -> Color.White
+        isSelected && resultStatus == ResultStatus.WIN -> SopkathonTheme.colors.blue_100
+        isSelected && resultStatus == ResultStatus.LOSE -> SopkathonTheme.colors.subPink
+        else -> SopkathonTheme.colors.gray_100
     }
 
     Box(
         modifier = Modifier
             .weight(weight)
             .fillMaxHeight()
-            .background(backgroundColor, shape = RoundedCornerShape(size = 10.dp)),
+            .background(SopkathonTheme.colors.gray_100, shape = RoundedCornerShape(size = 10.dp)),
         contentAlignment = Alignment.Center
     ) {
+        // 채워지는 배경 (왼쪽에서 오른쪽으로 또는 오른쪽에서 왼쪽으로)
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(fillProgress)
+                .background(backgroundColor, shape = RoundedCornerShape(size = 10.dp))
+                .align(if (isLeftArgs) Alignment.CenterStart else Alignment.CenterEnd)
+        )
+
+        // 콘텐츠 (아이콘, 텍스트)
         Row(
             modifier = Modifier
                 .fillMaxSize()
@@ -172,11 +194,18 @@ fun VoteIcon(iconResId: Int) {
     )
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewVoteResultWin() {
     // 케이스 1: OPTION1 선택 및 WIN
+    val resultStatus = remember { mutableStateOf(ResultStatus.NONE) }
+
+    // Preview 진입 후 500ms 후에 결과 업데이트 (애니메이션 트리거)
+    LaunchedEffect(Unit) {
+        kotlinx.coroutines.delay(500)
+        resultStatus.value = ResultStatus.WIN
+    }
+
     Box(modifier = Modifier.padding(16.dp)) {
         VoteResultComponent(
             option1Title = "똥 맛 카레",
@@ -184,7 +213,7 @@ fun PreviewVoteResultWin() {
             option1Total = 662,
             option2Total = 332,
             memberOption = "OPTION1",
-            option1Result = ResultStatus.WIN,
+            option1Result = resultStatus.value,
             option2Result = ResultStatus.NONE
         )
     }
@@ -193,7 +222,17 @@ fun PreviewVoteResultWin() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewVoteResultLose() {
-    // 케이스 2: OPTION2 선택 및 LOSE
+    // 케이스 2: OPTION2 선택 및 LOSE (애니메이션 효과 포함)
+    val option1Status = remember { mutableStateOf(ResultStatus.NONE) }
+    val option2Status = remember { mutableStateOf(ResultStatus.NONE) }
+
+    // Preview 진입 후 500ms 후에 결과 업데이트 (애니메이션 트리거)
+    LaunchedEffect(Unit) {
+        kotlinx.coroutines.delay(500)
+        option1Status.value = ResultStatus.WIN
+        option2Status.value = ResultStatus.LOSE
+    }
+
     Box(modifier = Modifier.padding(16.dp)) {
         VoteResultComponent(
             option1Title = "치킨",
@@ -201,8 +240,50 @@ fun PreviewVoteResultLose() {
             option1Total = 1203,
             option2Total = 988,
             memberOption = "OPTION2",
+            option1Result = option1Status.value,
+            option2Result = option2Status.value
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewVoteResultRightWin() {
+    // 케이스 1-2: OPTION2(오른쪽) 선택 및 WIN (애니메이션 효과 포함)
+    val resultStatus = remember { mutableStateOf(ResultStatus.NONE) }
+
+    // Preview 진입 후 500ms 후에 결과 업데이트 (애니메이션 트리거)
+    LaunchedEffect(Unit) {
+        kotlinx.coroutines.delay(500)
+        resultStatus.value = ResultStatus.WIN
+    }
+
+    Box(modifier = Modifier.padding(16.dp)) {
+        VoteResultComponent(
+            option1Title = "카레 맛 똥",
+            option2Title = "똥 맛 카레",
+            option1Total = 332,
+            option2Total = 662,
+            memberOption = "OPTION2",
+            option1Result = ResultStatus.NONE,
+            option2Result = resultStatus.value
+        )
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewVoteResultImmediate() {
+    Box(modifier = Modifier.padding(16.dp)) {
+        VoteResultComponent(
+            option1Title = "아메리카노",
+            option2Title = "카페라떼",
+            option1Total = 800,
+            option2Total = 200,
+            memberOption = "OPTION1",
             option1Result = ResultStatus.WIN,
-            option2Result = ResultStatus.LOSE
+            option2Result = ResultStatus.NONE
         )
     }
 }
