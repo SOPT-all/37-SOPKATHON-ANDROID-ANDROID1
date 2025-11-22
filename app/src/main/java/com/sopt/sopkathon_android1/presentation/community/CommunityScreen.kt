@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.sopt.sopkathon_android1.core.designsystem.component.SopkathonTopappbar
 import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
 import com.sopt.sopkathon_android1.data.dto.info.BalanceGameInfo
 
@@ -57,10 +58,8 @@ fun CommunityScreen(
             .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "밸런스 광장",
-            style = SopkathonTheme.typography.bodyRegular14,
-            color = SopkathonTheme.colors.gray_800
+        SopkathonTopappbar(
+            title = "밸런스 광장",
         )
 
         Spacer(Modifier.height(18.dp))
