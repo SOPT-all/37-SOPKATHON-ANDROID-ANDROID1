@@ -14,10 +14,11 @@ val Gray_600 = Color(0xFF919191)
 val Gray_700 = Color(0xFF616161)
 val Gray_800 = Color(0xFF212121)
 
-//Brand Colors
+// Brand Colors
 val Blue_500 = Color(0xFF5061FF)
 val Blue_300 = Color(0xFF98B6FF)
 val Blue_100 = Color(0xFFBFD6F4)
+
 val SubYellow = Color(0xFFFFDA50)
 val SubPink = Color(0xFFFFCFED)
 @Immutable
@@ -37,8 +38,6 @@ data class SopkathonColors(
 
     val subYellow: Color = SubYellow,
     val subPink: Color = SubPink,
-
-
 )
 
 val defaultSopkathonColors = SopkathonColors(
