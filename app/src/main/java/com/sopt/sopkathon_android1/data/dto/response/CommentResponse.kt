@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 // 댓글 보기 API Response
 @Serializable
 data class CommentResponse(
-    @SerialName("commentList")
-    val commentList: List<CommentInfo>
+    @SerialName("getCommentResponseDto")
+    val getCommentResponseDto: List<CommentInfo>
 )

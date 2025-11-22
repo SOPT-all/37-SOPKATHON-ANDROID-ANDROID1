@@ -18,33 +18,33 @@ import retrofit2.http.Query
 
 interface CoreService {
     @GET("api/v1/balance-games/today")
-    fun getTodayBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
+    suspend fun getTodayBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
 
     @GET("api/v1/balance-games/hot")
-    fun getHotBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
+    suspend fun getHotBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
 
     @GET("api/v1/balance-games/current-participants")
-    fun getParticipatingBalanceGame() : Response<BaseResponse<ParticipatingBalanceGameResponse>>
+    suspend fun getParticipatingBalanceGame() : Response<BaseResponse<ParticipatingBalanceGameResponse>>
 
     @GET("api/v1/balance-games/{balanceGameId}")
-    fun getBalanceGameInfo(@Path("balanceGameId") balanceGameId: Int) : Response<BaseResponse<BalanceGameInfo>>
+    suspend fun getBalanceGameInfo(@Path("balanceGameId") balanceGameId: Int) : Response<BaseResponse<BalanceGameInfo>>
 
     @POST("api/v1/balance-games/{balanceGameId}/comments")
-    fun writeComment(@Path("balanceGameId") balanceGameId: Int, @Body writeCommentRequest: WriteCommentRequest) : Response<BaseResponse<Unit>>
+    suspend fun writeComment(@Path("balanceGameId") balanceGameId: Int, @Body writeCommentRequest: WriteCommentRequest) : Response<Unit>
 
     @GET("api/v1/balance-games/{balanceGameId}/comments")
-    fun getComments(@Path("balanceGameId") balanceGameId: Int) : Response<BaseResponse<CommentResponse>>
+    suspend fun getComments(@Path("balanceGameId") balanceGameId: Int) : Response<BaseResponse<CommentResponse>>
 
     @POST("api/v1/banace-games/{balanceGameId}/likes")
-    fun likeBalanceGame(@Path("balanceGameId") balanceGameId: Int, @Body likeRequest: LikeRequest) : Response<BaseResponse<Unit>>
+    suspend fun likeBalanceGame(@Path("balanceGameId") balanceGameId: Int, @Body likeRequest: LikeRequest) : Response<Unit>
 
     @GET("api/v1/balance-games/past-participants")
-    fun getParticipatedBalanceGame() : Response<BaseResponse<ParticipatedBalanceGameResponse>>
+    suspend fun getParticipatedBalanceGame() : Response<BaseResponse<ParticipatedBalanceGameResponse>>
 
     @POST("api/v1/balance-games/{balanceGameId}")
-    fun voteBalanceGame(@Path("balanceGameId") balanceGameId: Int, @Body voteBalanceGameRequest: VoteBalanceGameRequest) : Response<BaseResponse<Unit>>
+    suspend fun voteBalanceGame(@Path("balanceGameId") balanceGameId: Int, @Body voteBalanceGameRequest: VoteBalanceGameRequest) : Response<Unit>
 
     @GET("api/v1/balance-games?category")
-    fun getAllBalanceGame(@Query("category") category: String) : Response<BaseResponse<BalanceGameAllResponse>>
+    suspend fun getAllBalanceGame(@Query("category") category: String) : Response<BaseResponse<BalanceGameAllResponse>>
 
 }
