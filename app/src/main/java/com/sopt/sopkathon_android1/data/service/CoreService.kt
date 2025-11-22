@@ -44,7 +44,7 @@ interface CoreService {
     @POST("api/v1/balance-games/{balanceGameId}")
     suspend fun voteBalanceGame(@Path("balanceGameId") balanceGameId: Int, @Body voteBalanceGameRequest: VoteBalanceGameRequest) : Response<Unit>
 
-    @GET("api/v1/balance-games?category")
+    @GET("api/v1/balance-games")
     suspend fun getAllBalanceGame(@Query("category") category: String) : Response<BaseResponse<BalanceGameAllResponse>>
 
 }
