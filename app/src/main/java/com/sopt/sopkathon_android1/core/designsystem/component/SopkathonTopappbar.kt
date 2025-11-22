@@ -1,6 +1,8 @@
 package com.sopt.sopkathon_android1.core.designsystem.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,21 +24,17 @@ import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
 fun SopkathonTopappbar(
     title: String,
     modifier: Modifier = Modifier,
+    navigationIcon: @Composable () -> Unit = {},
 ) {
-    Row(
+    Row (
         modifier = modifier
             .fillMaxWidth()
             .background(SopkathonTheme.colors.gray_100)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Icon(
-            imageVector = ImageVector.vectorResource(id = R.drawable.icon_arrow_left),
-            contentDescription = null,
-            tint = SopkathonTheme.colors.gray_800,
-        )
-
-        Spacer(modifier = Modifier.width(24.dp))
+        horizontalArrangement = Arrangement.spacedBy(24.dp),
+    ){
+        navigationIcon()
 
         Text(
             text = title,
@@ -50,6 +48,14 @@ fun SopkathonTopappbar(
 @Composable
 private fun SopkathonHeaderPreview() {
     SopkathonTopappbar(
-        title = "오늘의 밸런스"
+        title = "오늘의 밸런스",
+        navigationIcon = {
+            Icon(
+                modifier = Modifier,
+                imageVector = ImageVector.vectorResource(R.drawable.icon_arrow_left),
+                contentDescription = null,
+                tint = SopkathonTheme.colors.gray_800,
+            )
+        },
     )
 }
