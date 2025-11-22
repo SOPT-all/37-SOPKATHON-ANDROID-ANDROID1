@@ -125,29 +125,16 @@ class DetailActivity : ComponentActivity() {
         likeOnClick: (Boolean) -> Unit,
         writeComment: (id: Int, content: String) -> Unit
     ) {
-        val isKeyboardVisible by keyboardAsState()
-        val yOffset by animateDpAsState(
-            targetValue = if (isKeyboardVisible) -(150).dp
-            else 0.dp,
-            label = "yOffset",
-        )
 
-        val textFieldYOffset by animateDpAsState(
-            targetValue = if (isKeyboardVisible) -(100).dp
-            else 0.dp,
-            label = "textFieldYOffset",
-        )
-
-        var isLike = balanceGameInfo.isLike
-        val likeIcon = if(isLike) ImageVector.vectorResource(R.drawable.icon_heart_fill)
-                        else ImageVector.vectorResource(R.drawable.icon_heart_empty)
+        var isLike by remember { mutableStateOf(balanceGameInfo.isLike) }
+        var likeCount by remember { mutableStateOf(balanceGameInfo.likeCount) }
 
         var commentText by remember { mutableStateOf("") }
 
         Column (
             modifier = Modifier
-                .systemBarsPadding()
                 .fillMaxSize()
+                .systemBarsPadding()
                 .background(SopkathonTheme.colors.gray_100)
         ) {
             SopkathonTopappbar(
@@ -170,7 +157,6 @@ class DetailActivity : ComponentActivity() {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .offset(y = yOffset)
             ) {
                 Column(
                     modifier = Modifier
@@ -207,13 +193,19 @@ class DetailActivity : ComponentActivity() {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            imageVector = likeIcon,
+                            imageVector = if(isLike) ImageVector.vectorResource(R.drawable.icon_heart_fill)
+                            else ImageVector.vectorResource(R.drawable.icon_heart_empty),
                             tint = Color.Unspecified,
                             contentDescription = null,
                             modifier = Modifier
                                 .size(24.dp)
                                 .noRippleClickable {
                                     isLike = !isLike
+                                    if(isLike) {
+                                        likeCount = likeCount + 1
+                                    } else {
+                                        likeCount = likeCount - 1
+                                    }
                                     likeOnClick(isLike)
                                 }
                         )
@@ -221,7 +213,7 @@ class DetailActivity : ComponentActivity() {
                         Spacer(Modifier.width(4.dp))
 
                         Text(
-                            text = "${balanceGameInfo.likeCount} 명",
+                            text = "$likeCount 명",
                             style = SopkathonTheme.typography.descriptionMedium12,
                             color = SopkathonTheme.colors.gray_600
                         )
@@ -267,7 +259,6 @@ class DetailActivity : ComponentActivity() {
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
                         .padding(bottom = 16.dp)
-                        .offset(y = textFieldYOffset)
                 ) {
                     BasicTextField(
                         value = commentText,
@@ -459,7 +450,7 @@ class DetailActivity : ComponentActivity() {
         val currentTime = System.currentTimeMillis()
 
         val diffMillis = targetTime - currentTime
-        val hours = diffMillis / 3600000
+        val hours = 4
         val minutes = (diffMillis % 3600000) / 60000
         val seconds = (diffMillis % 60000) / 1000
 

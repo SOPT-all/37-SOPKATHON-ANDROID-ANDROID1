@@ -35,7 +35,7 @@ interface CoreService {
     @GET("api/v1/balance-games/{balanceGameId}/comments")
     suspend fun getComments(@Path("balanceGameId") balanceGameId: Int) : Response<BaseResponse<CommentResponse>>
 
-    @POST("api/v1/balance-games/{balanceGameId}/likes")
+    @POST("api/v1/balance-games/{balanceGameId}/like")
     suspend fun likeBalanceGame(@Path("balanceGameId") balanceGameId: Int, @Body likeRequest: LikeRequest) : Response<Unit>
 
     @GET("api/v1/balance-games/past-participants")
