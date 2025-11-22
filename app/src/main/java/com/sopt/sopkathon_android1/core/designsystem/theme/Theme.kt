@@ -70,7 +70,7 @@ fun SOPKATHONTheme(
 
 @Preview(showBackground = true, heightDp = 1000)
 @Composable
-fun SopkathonMainColorsPreview() {
+private fun SopkathonMainColorsPreview() {
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
