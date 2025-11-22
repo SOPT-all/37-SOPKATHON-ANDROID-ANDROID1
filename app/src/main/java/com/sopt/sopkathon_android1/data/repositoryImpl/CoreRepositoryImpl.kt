@@ -21,7 +21,7 @@ class CoreRepositoryImpl @Inject constructor(
         return coreService.getTodayBalanceGame()
     }
 
-    override suspend fun getHotBalanceGame(): Response<BaseResponse<BalanceGameInfo>> {
+    override suspend fun getHotBalanceGame(): Response<BaseResponse<List<BalanceGameInfo>>> {
         return coreService.getHotBalanceGame()
     }
 

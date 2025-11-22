@@ -16,9 +16,12 @@
         <activity
             android:name=".presentation.home.HomeActivity"
             android:exported="true"
-            android:label="@string/title_activity_splash"
+            android:label="@string/title_activity_home"
             android:theme="@style/Theme._37SOPKATHONANDROIDANDROID1" >
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

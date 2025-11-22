@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 //밸런스 게임 전체(마감x) 조회
 @Serializable
 data class BalanceGameAllResponse(
-    @SerialName("balanceGameList")
+    @SerialName("balanceGames")
     val balanceGameList: List<BalanceGameInfo>
 )

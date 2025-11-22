@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 // 내가 참여중인 밸런스 게임(마감x) 조회 API Response
 @Serializable
 data class ParticipatingBalanceGameResponse (
-    @SerialName("balanceGameList")
+    @SerialName("balanceGames")
     val balanceGameList: List<BalanceGameInfo>
 )

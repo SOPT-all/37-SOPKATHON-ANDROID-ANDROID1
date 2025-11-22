@@ -34,7 +34,7 @@ fun HotBalanceGameRow(
     ) {
         items(
             items = balanceGames,
-            key = { item -> item.balanceGameId },
+            key = { item -> item.id },
             contentType = { item -> item.category }
         ) { item ->
             HotBalanceGameCard(
@@ -104,35 +104,38 @@ private fun HotBalanceGameRowPreview() {
         HotBalanceGameRow(
             balanceGames = listOf(
                 BalanceGameInfo(
-                    balanceGameId = 1,
+                    id = 1,
                     title = "시험 전날",
                     option1Title = "라면",
                     option2Title = "탄산",
                     isLike = false,
-                    memberOption = "OPTION1", // 사용자가 선택한 옵션 (예: 서버값)
+                    likeCount = 10,
+                    memberOption = "OPTION1",
                     option1Total = 150,
                     option2Total = 45,
                     deadline = "D-5",
                     category = "FOOD"
                 ),
                 BalanceGameInfo(
-                    balanceGameId = 2,
+                    id = 2,
                     title = "시험 전날",
                     option1Title = "재입대",
                     option2Title = "그냥 살기",
-                    isLike = true, // 좋아요 누름
-                    memberOption = "", // 아직 투표 안 함
+                    isLike = true,
+                    likeCount = 10,
+                    memberOption = "",
                     option1Total = 12,
                     option2Total = 300,
                     deadline = "D-1",
                     category = "FANTASY"
                 ),
                 BalanceGameInfo(
-                    balanceGameId = 3,
+                    id = 3,
                     title = "시험 전날",
                     option1Title = "연락 두절",
                     option2Title = "여사친/남사친 부자",
                     isLike = false,
+                    likeCount = 10,
                     memberOption = "OPTION2",
                     option1Total = 89,
                     option2Total = 92,
