@@ -1,5 +1,7 @@
 package com.sopt.sopkathon_android1.presentation.home
 
+import ResultStatus
+import VoteResultComponent
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -166,7 +168,30 @@ fun HomeScreen(
 
                 Spacer(Modifier.height(12.dp))
 
-                // TODO: 투표 리스트
+                Column(
+                    modifier = paddedModifier,
+                    verticalArrangement = Arrangement.spacedBy(15.dp),
+                ) {
+                    uiState.participatingBalanceGames.take(3).forEach {
+                        VoteResultComponent(
+                            option1Title = it.option1Title,
+                            option2Title = it.option2Title,
+                            option1Total = it.option1Total,
+                            option2Total = it.option2Total,
+                            memberOption = it.memberOption,
+                            option1Result = if (it.memberOption == "OPTION1") {
+                                if (it.option1Total > it.option2Total) ResultStatus.WIN else ResultStatus.LOSE
+                            } else {
+                                ResultStatus.NONE
+                            },
+                            option2Result = if (it.memberOption == "OPTION2") {
+                                if (it.option2Total > it.option1Total) ResultStatus.WIN else ResultStatus.LOSE
+                            } else {
+                                ResultStatus.NONE
+                            }
+                        )
+                    }
+                }
 
                 Spacer(Modifier.height(16.dp))
 
