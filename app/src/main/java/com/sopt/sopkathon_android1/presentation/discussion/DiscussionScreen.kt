@@ -1,7 +1,6 @@
-package com.sopt.sopkathon_android1.presentation.search
+package com.sopt.sopkathon_android1.presentation.discussion
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -10,16 +9,16 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun SearchScreen(
+fun DiscussionScreen(
     modifier: Modifier = Modifier,
-    viewModel: SearchViewModel = hiltViewModel()
+    viewModel: DiscussionViewModel = hiltViewModel()
 ) {
     Box(
         modifier = modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Search"
+            text = "Discussion"
         )
     }
 }
