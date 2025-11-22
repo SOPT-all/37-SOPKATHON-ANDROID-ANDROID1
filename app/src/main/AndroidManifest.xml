@@ -23,6 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".presentation.detail.DetailActivity"
+            android:exported="true"
+            android:theme="@style/Theme._37SOPKATHONANDROIDANDROID1" >
+        </activity>
     </application>
 
 </manifest>

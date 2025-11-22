@@ -53,6 +53,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.sopt.sopkathon_android1.R
+import com.sopt.sopkathon_android1.core.designsystem.component.BalanceGameCard
 import com.sopt.sopkathon_android1.core.designsystem.component.SopkathonTopappbar
 import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
 import com.sopt.sopkathon_android1.core.util.noRippleClickable
@@ -180,9 +181,18 @@ class DetailActivity : ComponentActivity() {
                     )
 
                     Spacer(Modifier.height(16.dp))
-
-                    // TODO
-                    Spacer(Modifier.height(92.dp))
+                    
+                    BalanceGameCard(
+                        option1Title = balanceGameInfo.option1Title,
+                        option1Total = balanceGameInfo.option1Total,
+                        option2Title = balanceGameInfo.option2Title,
+                        option2Total = balanceGameInfo.option2Total,
+                        onClick = {
+                            val index = if(balanceGameInfo.option1Total > balanceGameInfo.option2Total) 0 else 1
+                            viewModel.voteBalanceGame(balanceGameInfo.id, index)
+                        },
+                        modifier = Modifier.padding(horizontal = 24.dp),
+                    )
 
                     Spacer(Modifier.height(12.dp))
 

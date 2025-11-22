@@ -1,5 +1,6 @@
 package com.sopt.sopkathon_android1.presentation.home
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,6 +36,8 @@ import com.sopt.sopkathon_android1.R.drawable.image_logo
 import com.sopt.sopkathon_android1.core.designsystem.component.BalanceGameCard
 import com.sopt.sopkathon_android1.core.designsystem.theme.SOPKATHONTheme
 import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
+import com.sopt.sopkathon_android1.core.util.findActivity
+import com.sopt.sopkathon_android1.presentation.detail.DetailActivity
 import com.sopt.sopkathon_android1.presentation.home.components.HotBalanceGameRow
 import com.sopt.sopkathon_android1.presentation.home.components.TitleRow
 import kotlinx.coroutines.delay
@@ -48,6 +52,9 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
+    val activity = context.findActivity() as HomeActivity
+
     val paddedModifier = Modifier.padding(horizontal = 20.dp)
     val scrollState = rememberScrollState()
     val uiState by viewModel.homeUiState.collectAsStateWithLifecycle()
@@ -120,7 +127,10 @@ fun HomeScreen(
 
                 TitleRow(
                     title = uiState.todayBalanceGame?.title.orEmpty(),
-                    onClick = {},
+                    onClick = {
+                        val intent = Intent(context, DetailActivity::class.java)
+                        activity.startActivity(intent)
+                    },
                     modifier = paddedModifier,
                 )
 
