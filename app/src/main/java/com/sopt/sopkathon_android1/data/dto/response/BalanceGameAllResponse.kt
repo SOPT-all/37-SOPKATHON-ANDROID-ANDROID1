@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class BalanceGameAllResponse(
     @SerialName("balanceGames")
-    val balanceGameList: List<BalanceGameInfo>
+    val balanceGames: List<BalanceGameInfo>
 )

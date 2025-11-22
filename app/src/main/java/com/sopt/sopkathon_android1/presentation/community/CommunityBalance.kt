@@ -14,10 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
+import com.sopt.sopkathon_android1.data.dto.info.BalanceGameInfo
 import java.util.UUID
 
 @Composable
 fun CommunityBalance(
+    balances: List<BalanceGameInfo> = listOf(),
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -26,7 +28,7 @@ fun CommunityBalance(
             .background(SopkathonTheme.colors.gray_100),
     ) {
 
-        itemsIndexed(balances, key = { _, item -> item.balanceId }) { index, item ->
+        itemsIndexed(balances, key = { _, item -> item.id }) { index, item ->
 
             CommunityBalanceItem(
                 title = item.title,
@@ -48,42 +50,6 @@ fun CommunityBalance(
         }
     }
 }
-
-
-data class CommunityBalanceModel(
-    val title: String,
-    val option1Title: String,
-    val option2Title: String,
-    val balanceId: String = UUID.randomUUID().toString(),
-)
-
-private val balances = listOf(
-    CommunityBalanceModel(
-        title = "홍학의 자리",
-        option1Title = "짜장면",
-        option2Title = "짬뽕"
-    ),
-    CommunityBalanceModel(
-        title = "홍학의 자리",
-        option1Title = "짜장면",
-        option2Title = "짬뽕"
-    ),
-    CommunityBalanceModel(
-        title = "홍학의 자리",
-        option1Title = "짜장면",
-        option2Title = "짬뽕"
-    ),
-    CommunityBalanceModel(
-        title = "홍학의 자리",
-        option1Title = "짜장면",
-        option2Title = "짬뽕"
-    ),
-    CommunityBalanceModel(
-        title = "홍학의 자리",
-        option1Title = "짜장면",
-        option2Title = "짬뽕"
-    ),
-)
 
 
 @Preview(showBackground = true)

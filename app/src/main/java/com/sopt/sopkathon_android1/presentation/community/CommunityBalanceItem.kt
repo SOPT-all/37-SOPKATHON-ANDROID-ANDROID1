@@ -96,18 +96,18 @@ private fun CommunityBalanceChoose(
             modifier = Modifier
                 .weight(1f)
                 .clickable {
-                    selectedIndex = if (selectedIndex == 1) null else 1
+                    selectedIndex = if (selectedIndex == 0) null else 1
                 }
         )
 
         CommunityBalanceItemBox(
             title = box2,
-            selected = selectedIndex == 1,
+            selected = selectedIndex == 0,
             hasAnySelected = hasAnySelected,
             modifier = Modifier
                 .weight(1f)
                 .clickable {
-                    selectedIndex = if (selectedIndex == 1) null else 1
+                    selectedIndex = if (selectedIndex == 1) null else 0
                 }
         )
     }
