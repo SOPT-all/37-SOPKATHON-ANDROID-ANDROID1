@@ -47,10 +47,10 @@ object NetworkModule {
     @Singleton
     fun providesHeaderInterceptor(): Interceptor {
         return Interceptor { chain ->
-            //TODO 나중에 custom 헤더 추가되면 여기로
             val request = chain
                 .request()
                 .newBuilder()
+                .addHeader("X-Member-Id", "1")
                 .build()
             chain.proceed(request)
         }
