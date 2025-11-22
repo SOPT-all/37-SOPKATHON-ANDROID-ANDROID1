@@ -107,14 +107,6 @@ fun VoteResultItem(game: com.sopt.sopkathon_android1.data.dto.info.BalanceGameIn
             .fillMaxWidth()
             .padding(vertical = 12.dp)
     ) {
-        Text(
-            text = game.title,
-            style = SopkathonTheme.typography.bodyMedium16,
-            color = SopkathonTheme.colors.gray_800
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
         VoteResultComponent(
             option1Title = game.option1Title,
             option2Title = game.option2Title,
