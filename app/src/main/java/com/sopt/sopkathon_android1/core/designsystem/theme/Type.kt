@@ -32,7 +32,6 @@ object RobotoFont {
     )
 }
 
-
 @Immutable
 data class SopkathonTypography(
     // Headline
@@ -51,7 +50,6 @@ data class SopkathonTypography(
     val descriptionMedium12: TextStyle,
     val descriptionMedium10: TextStyle
 )
-
 
 private fun sopkathonTextStyle(
     fontFamily: FontFamily,
@@ -117,4 +115,5 @@ val defaultSopkathonTypography = SopkathonTypography(
         lineHeight = 15.6.sp
     )
 )
-    val localSopkathonTypography = staticCompositionLocalOf { defaultSopkathonTypography }
+
+val localSopkathonTypography = staticCompositionLocalOf { defaultSopkathonTypography }
