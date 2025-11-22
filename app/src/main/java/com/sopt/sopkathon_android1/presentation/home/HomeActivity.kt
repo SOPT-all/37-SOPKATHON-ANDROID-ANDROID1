@@ -6,24 +6,22 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.zIndex
+import com.sopt.sopkathon_android1.presentation.community.CommunityScreen
+import com.sopt.sopkathon_android1.presentation.discussion.DiscussionScreen
+import com.sopt.sopkathon_android1.presentation.generate.GenerateScreen
 import com.sopt.sopkathon_android1.presentation.home.bottomNavi.BottomNavi
 import com.sopt.sopkathon_android1.presentation.home.bottomNavi.BottomNaviType
 import com.sopt.sopkathon_android1.presentation.profile.ProfileScreen
-import com.sopt.sopkathon_android1.presentation.search.SearchScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,17 +44,20 @@ class HomeActivity : ComponentActivity() {
         Column (
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White),
+                .background(Color.White)
+                .navigationBarsPadding(),
         ) {
             when(selectedScreen) {
                 BottomNaviType.HOME -> HomeScreen(modifier = Modifier.weight(1f))
-                BottomNaviType.SEARCH -> SearchScreen(modifier = Modifier.weight(1f))
+                BottomNaviType.COMMUNITY -> CommunityScreen(modifier = Modifier.weight(1f))
+                BottomNaviType.GENERATE -> GenerateScreen(modifier = Modifier.weight(1f))
                 BottomNaviType.PROFILE -> ProfileScreen(modifier = Modifier.weight(1f))
             }
 
             BottomNavi(
                 homeOnClick = { selectedScreen = BottomNaviType.HOME },
-                searchOnClick = { selectedScreen = BottomNaviType.SEARCH },
+                communityOnClick = { selectedScreen = BottomNaviType.COMMUNITY },
+                generateOnClick = { selectedScreen = BottomNaviType.GENERATE },
                 profileOnClick = { selectedScreen = BottomNaviType.PROFILE }
             )
         }
