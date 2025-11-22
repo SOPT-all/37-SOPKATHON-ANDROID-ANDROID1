@@ -1,5 +1,6 @@
 package com.sopt.sopkathon_android1.core.di
 
+import com.sopt.sopkathon_android1.data.service.CoreService
 import com.sopt.sopkathon_android1.data.service.DummyService
 import dagger.Module
 import dagger.Provides
@@ -15,4 +16,8 @@ object ServiceModule {
     @Provides
     @Singleton
     fun provideDummyApi(retrofit: Retrofit): DummyService = retrofit.create(DummyService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideCoreApi(retrofit: Retrofit): CoreService = retrofit.create(CoreService::class.java)
 }

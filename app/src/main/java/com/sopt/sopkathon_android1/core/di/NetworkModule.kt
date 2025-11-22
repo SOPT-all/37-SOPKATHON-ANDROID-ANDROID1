@@ -11,6 +11,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -33,13 +34,15 @@ object NetworkModule {
     @Provides
     @Singleton
     fun providesOkHttpClient(
-        headerInterceptor: Interceptor
+        headerInterceptor: Interceptor,
+        loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient =
         OkHttpClient.Builder().apply {
             connectTimeout(10, TimeUnit.SECONDS)
             writeTimeout(10, TimeUnit.SECONDS)
             readTimeout(10, TimeUnit.SECONDS)
             addInterceptor(headerInterceptor)
+            addInterceptor(loggingInterceptor)
         }.build()
 
 
@@ -53,6 +56,18 @@ object NetworkModule {
                 .addHeader("X-Member-Id", "1")
                 .build()
             chain.proceed(request)
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun providesLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
         }
     }
 

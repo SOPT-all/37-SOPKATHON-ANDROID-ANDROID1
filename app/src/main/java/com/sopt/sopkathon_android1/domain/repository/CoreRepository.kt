@@ -12,14 +12,14 @@ import com.sopt.sopkathon_android1.data.dto.response.ParticipatingBalanceGameRes
 import retrofit2.Response
 
 interface CoreRepository {
-    fun getTodayBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
-    fun getHotBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
-    fun getParticipatingBalanceGame() : Response<BaseResponse<ParticipatingBalanceGameResponse>>
-    fun getBalanceGameInfo(balanceGameId: Int) : Response<BaseResponse<BalanceGameInfo>>
-    fun writeComment(balanceGameId: Int, writeCommentRequest: WriteCommentRequest) : Response<BaseResponse<Unit>>
-    fun getComments(balanceGameId: Int) : Response<BaseResponse<CommentResponse>>
-    fun likeBalanceGame(balanceGameId: Int, likeRequest: LikeRequest) : Response<BaseResponse<Unit>>
-    fun getParticipatedBalanceGame() : Response<BaseResponse<ParticipatedBalanceGameResponse>>
-    fun voteBalanceGame(balanceGameId: Int, voteBalanceGameRequest: VoteBalanceGameRequest) : Response<BaseResponse<Unit>>
-    fun getAllBalanceGame(category: String) : Response<BaseResponse<BalanceGameAllResponse>>
+    suspend fun getTodayBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
+    suspend fun getHotBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
+    suspend fun getParticipatingBalanceGame() : Response<BaseResponse<ParticipatingBalanceGameResponse>>
+    suspend fun getBalanceGameInfo(balanceGameId: Int) : Response<BaseResponse<BalanceGameInfo>>
+    suspend fun writeComment(balanceGameId: Int, writeCommentRequest: WriteCommentRequest) : Response<Unit>
+    suspend fun getComments(balanceGameId: Int) : Response<BaseResponse<CommentResponse>>
+    suspend fun likeBalanceGame(balanceGameId: Int, likeRequest: LikeRequest) : Response<Unit>
+    suspend fun getParticipatedBalanceGame() : Response<BaseResponse<ParticipatedBalanceGameResponse>>
+    suspend fun voteBalanceGame(balanceGameId: Int, voteBalanceGameRequest: VoteBalanceGameRequest) : Response<Unit>
+    suspend fun getAllBalanceGame(category: String) : Response<BaseResponse<BalanceGameAllResponse>>
 }

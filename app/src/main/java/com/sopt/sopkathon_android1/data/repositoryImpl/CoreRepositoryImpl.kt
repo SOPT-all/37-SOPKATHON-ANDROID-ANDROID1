@@ -17,52 +17,52 @@ import javax.inject.Inject
 class CoreRepositoryImpl @Inject constructor(
     private val coreService: CoreService
 ) : CoreRepository{
-    override fun getTodayBalanceGame(): Response<BaseResponse<BalanceGameInfo>> {
+    override suspend fun getTodayBalanceGame(): Response<BaseResponse<BalanceGameInfo>> {
         return coreService.getTodayBalanceGame()
     }
 
-    override fun getHotBalanceGame(): Response<BaseResponse<BalanceGameInfo>> {
+    override suspend fun getHotBalanceGame(): Response<BaseResponse<BalanceGameInfo>> {
         return coreService.getHotBalanceGame()
     }
 
-    override fun getParticipatingBalanceGame(): Response<BaseResponse<ParticipatingBalanceGameResponse>> {
+    override suspend fun getParticipatingBalanceGame(): Response<BaseResponse<ParticipatingBalanceGameResponse>> {
         return coreService.getParticipatingBalanceGame()
     }
 
-    override fun getBalanceGameInfo(balanceGameId: Int): Response<BaseResponse<BalanceGameInfo>> {
+    override suspend fun getBalanceGameInfo(balanceGameId: Int): Response<BaseResponse<BalanceGameInfo>> {
         return coreService.getBalanceGameInfo(balanceGameId)
     }
 
-    override fun writeComment(
+    override suspend fun writeComment(
         balanceGameId: Int,
         writeCommentRequest: WriteCommentRequest
-    ): Response<BaseResponse<Unit>> {
+    ): Response<Unit> {
         return coreService.writeComment(balanceGameId, writeCommentRequest)
     }
 
-    override fun getComments(balanceGameId: Int): Response<BaseResponse<CommentResponse>> {
+    override suspend fun getComments(balanceGameId: Int): Response<BaseResponse<CommentResponse>> {
         return coreService.getComments(balanceGameId)
     }
 
-    override fun likeBalanceGame(
+    override suspend fun likeBalanceGame(
         balanceGameId: Int,
         likeRequest: LikeRequest
-    ): Response<BaseResponse<Unit>> {
+    ): Response<Unit> {
         return coreService.likeBalanceGame(balanceGameId, likeRequest)
     }
 
-    override fun getParticipatedBalanceGame(): Response<BaseResponse<ParticipatedBalanceGameResponse>> {
+    override suspend fun getParticipatedBalanceGame(): Response<BaseResponse<ParticipatedBalanceGameResponse>> {
         return coreService.getParticipatedBalanceGame()
     }
 
-    override fun voteBalanceGame(
+    override suspend fun voteBalanceGame(
         balanceGameId: Int,
         voteBalanceGameRequest: VoteBalanceGameRequest
-    ): Response<BaseResponse<Unit>> {
+    ): Response<Unit> {
         return coreService.voteBalanceGame(balanceGameId, voteBalanceGameRequest)
     }
 
-    override fun getAllBalanceGame(category: String): Response<BaseResponse<BalanceGameAllResponse>> {
+    override suspend fun getAllBalanceGame(category: String): Response<BaseResponse<BalanceGameAllResponse>> {
         return coreService.getAllBalanceGame(category)
     }
 }
