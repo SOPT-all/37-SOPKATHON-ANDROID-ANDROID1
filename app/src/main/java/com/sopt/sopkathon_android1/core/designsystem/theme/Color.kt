@@ -18,9 +18,9 @@ val Gray_800 = Color(0xFF212121)
 val Blue_500 = Color(0xFF5061FF)
 val Blue_300 = Color(0xFF98B6FF)
 val Blue_100 = Color(0xFFBFD6F4)
-
 val SubYellow = Color(0xFFFFDA50)
 val SubPink = Color(0xFFFFCFED)
+
 @Immutable
 data class SopkathonColors(
     val gray_100: Color = Gray_100,
