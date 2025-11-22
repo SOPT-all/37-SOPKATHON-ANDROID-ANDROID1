@@ -39,6 +39,7 @@ import com.sopt.sopkathon_android1.core.designsystem.component.BalanceGameCard
 import com.sopt.sopkathon_android1.core.designsystem.theme.SOPKATHONTheme
 import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
 import com.sopt.sopkathon_android1.core.util.findActivity
+import com.sopt.sopkathon_android1.data.dto.info.BalanceGameInfo
 import com.sopt.sopkathon_android1.presentation.detail.DetailActivity
 import com.sopt.sopkathon_android1.presentation.home.components.HotBalanceGameRow
 import com.sopt.sopkathon_android1.presentation.home.components.TitleRow
@@ -172,23 +173,10 @@ fun HomeScreen(
                     modifier = paddedModifier,
                     verticalArrangement = Arrangement.spacedBy(15.dp),
                 ) {
-                    uiState.participatingBalanceGames.take(3).forEach {
-                        VoteResultComponent(
-                            option1Title = it.option1Title,
-                            option2Title = it.option2Title,
-                            option1Total = it.option1Total,
-                            option2Total = it.option2Total,
-                            memberOption = it.memberOption,
-                            option1Result = if (it.memberOption == "OPTION1") {
-                                if (it.option1Total > it.option2Total) ResultStatus.WIN else ResultStatus.LOSE
-                            } else {
-                                ResultStatus.NONE
-                            },
-                            option2Result = if (it.memberOption == "OPTION2") {
-                                if (it.option2Total > it.option1Total) ResultStatus.WIN else ResultStatus.LOSE
-                            } else {
-                                ResultStatus.NONE
-                            }
+                    uiState.participatingBalanceGames.take(3).forEachIndexed { index, game ->
+                        ParticipatingGameItem(
+                            game = game,
+                            delayMillis = (index * 200).toLong()
                         )
                     }
                 }
@@ -208,6 +196,42 @@ fun HomeScreen(
             HotBalanceGameRow(balanceGames = uiState.hotBalanceGames)
         }
     }
+}
+
+@Composable
+fun ParticipatingGameItem(
+    game: BalanceGameInfo,
+    delayMillis: Long = 0
+) {
+    var option1Result by remember { mutableStateOf(ResultStatus.NONE) }
+    var option2Result by remember { mutableStateOf(ResultStatus.NONE) }
+
+    // 딜레이 후 결과 상태 업데이트 (애니메이션 트리거)
+    LaunchedEffect(game.id) {
+        delay(500 + delayMillis)
+
+        option1Result = if (game.memberOption == "OPTION1") {
+            if (game.option1Total > game.option2Total) ResultStatus.WIN else ResultStatus.LOSE
+        } else {
+            ResultStatus.NONE
+        }
+
+        option2Result = if (game.memberOption == "OPTION2") {
+            if (game.option2Total > game.option1Total) ResultStatus.WIN else ResultStatus.LOSE
+        } else {
+            ResultStatus.NONE
+        }
+    }
+
+    VoteResultComponent(
+        option1Title = game.option1Title,
+        option2Title = game.option2Title,
+        option1Total = game.option1Total,
+        option2Total = game.option2Total,
+        memberOption = game.memberOption,
+        option1Result = option1Result,
+        option2Result = option2Result
+    )
 }
 
 private fun calculateRemainingTime(deadlineString: String?): String {
