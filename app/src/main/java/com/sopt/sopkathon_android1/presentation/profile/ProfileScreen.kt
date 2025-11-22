@@ -14,6 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +27,7 @@ import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
 import com.sopt.sopkathon_android1.presentation.profile.component.ProfileCard
 import VoteResultComponent
 import ResultStatus
+import kotlinx.coroutines.delay
 
 @Composable
 fun ProfileScreen(
@@ -65,44 +69,61 @@ fun ProfileScreen(
                 .padding(horizontal = 16.dp)
         ) {
             participatedGames.forEach { game ->
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 12.dp)
-                ) {
-                    Text(
-                        text = game.title,
-                        style = SopkathonTheme.typography.bodyMedium16,
-                        color = SopkathonTheme.colors.gray_800
-                    )
-
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    val option1Won = game.option1Total > game.option2Total
-                    val option2Won = game.option2Total > game.option1Total
-
-                    VoteResultComponent(
-                        option1Title = game.option1Title,
-                        option2Title = game.option2Title,
-                        option1Total = game.option1Total,
-                        option2Total = game.option2Total,
-                        memberOption = game.memberOption,
-                        option1Result = when {
-                            option1Won -> ResultStatus.WIN
-                            option2Won -> ResultStatus.LOSE
-                            else -> ResultStatus.NONE
-                        },
-                        option2Result = when {
-                            option2Won -> ResultStatus.WIN
-                            option1Won -> ResultStatus.LOSE
-                            else -> ResultStatus.NONE
-                        }
-                    )
-                }
+                VoteResultItem(game = game)
             }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+    }
+}
+
+@Composable
+fun VoteResultItem(game: com.sopt.sopkathon_android1.data.dto.info.BalanceGameInfo) {
+    var option1Result by remember { mutableStateOf(ResultStatus.NONE) }
+    var option2Result by remember { mutableStateOf(ResultStatus.NONE) }
+
+    // 초기 로드 후 500ms 후에 결과 상태 업데이트 (애니메이션 트리거)
+    LaunchedEffect(game.id) {
+        delay(500)
+
+        val option1Won = game.option1Total > game.option2Total
+        val option2Won = game.option2Total > game.option1Total
+
+        option1Result = when {
+            option1Won -> ResultStatus.WIN
+            option2Won -> ResultStatus.LOSE
+            else -> ResultStatus.NONE
+        }
+
+        option2Result = when {
+            option2Won -> ResultStatus.WIN
+            option1Won -> ResultStatus.LOSE
+            else -> ResultStatus.NONE
+        }
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 12.dp)
+    ) {
+        Text(
+            text = game.title,
+            style = SopkathonTheme.typography.bodyMedium16,
+            color = SopkathonTheme.colors.gray_800
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        VoteResultComponent(
+            option1Title = game.option1Title,
+            option2Title = game.option2Title,
+            option1Total = game.option1Total,
+            option2Total = game.option2Total,
+            memberOption = game.memberOption,
+            option1Result = option1Result,
+            option2Result = option2Result
+        )
     }
 }
 
