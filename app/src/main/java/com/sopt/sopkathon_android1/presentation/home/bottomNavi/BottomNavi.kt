@@ -1,7 +1,6 @@
 package com.sopt.sopkathon_android1.presentation.home.bottomNavi
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -37,7 +36,7 @@ fun BottomNavi(
     profileOnClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-     var selectedItem by remember { mutableStateOf(BottomNaviType.HOME) }
+    var selectedItem by remember { mutableStateOf(BottomNaviType.HOME) }
 
     Row(
         modifier = modifier
@@ -58,7 +57,7 @@ fun BottomNavi(
             Icon(
                 painter = painterResource(R.drawable.icon_home),
                 tint = if (selectedItem == BottomNaviType.HOME) SopkathonTheme.colors.blue_500
-                        else Color.Unspecified,
+                        else SopkathonTheme.colors.gray_500,
                 contentDescription = null,
                 modifier = Modifier.size(24.dp)
             )
@@ -68,7 +67,8 @@ fun BottomNavi(
             Text(
                 text = "홈",
                 style = SopkathonTheme.typography.descriptionMedium10,
-                color = SopkathonTheme.colors.gray_800
+                color = if (selectedItem == BottomNaviType.HOME) SopkathonTheme.colors.blue_500
+                        else SopkathonTheme.colors.gray_500
             )
         }
 
@@ -86,7 +86,7 @@ fun BottomNavi(
             Icon(
                 painter = painterResource(R.drawable.icon_users),
                 tint = if (selectedItem == BottomNaviType.COMMUNITY) SopkathonTheme.colors.blue_500
-                else Color.Unspecified,
+                        else SopkathonTheme.colors.gray_500,
                 contentDescription = null,
                 modifier = Modifier.size(24.dp)
             )
@@ -96,7 +96,8 @@ fun BottomNavi(
             Text(
                 text = "광장",
                 style = SopkathonTheme.typography.descriptionMedium10,
-                color = SopkathonTheme.colors.gray_800
+                color = if (selectedItem == BottomNaviType.COMMUNITY) SopkathonTheme.colors.blue_500
+                        else SopkathonTheme.colors.gray_500
             )
         }
 
@@ -114,7 +115,7 @@ fun BottomNavi(
             Icon(
                 painter = painterResource(R.drawable.icon_plus),
                 tint = if (selectedItem == BottomNaviType.GENERATE) SopkathonTheme.colors.blue_500
-                else Color.Unspecified,
+                        else SopkathonTheme.colors.gray_500,
                 contentDescription = null,
                 modifier = Modifier.size(24.dp)
             )
@@ -122,9 +123,10 @@ fun BottomNavi(
             Spacer(Modifier.height(8.dp))
 
             Text(
-                text = "생성",
+                text = "주제 생성",
                 style = SopkathonTheme.typography.descriptionMedium10,
-                color = SopkathonTheme.colors.gray_800
+                color = if (selectedItem == BottomNaviType.GENERATE) SopkathonTheme.colors.blue_500
+                        else SopkathonTheme.colors.gray_500,
             )
         }
 
@@ -142,7 +144,7 @@ fun BottomNavi(
             Icon(
                 painter = painterResource(R.drawable.icon_user),
                 tint = if (selectedItem == BottomNaviType.PROFILE) SopkathonTheme.colors.blue_500
-                else Color.Unspecified,
+                        else SopkathonTheme.colors.gray_500,
                 contentDescription = null,
                 modifier = Modifier.size(24.dp)
             )
@@ -152,7 +154,8 @@ fun BottomNavi(
             Text(
                 text = "마이페이지",
                 style = SopkathonTheme.typography.descriptionMedium10,
-                color = SopkathonTheme.colors.gray_800
+                color = if (selectedItem == BottomNaviType.PROFILE) SopkathonTheme.colors.blue_500
+                        else SopkathonTheme.colors.gray_500,
             )
         }
     }
