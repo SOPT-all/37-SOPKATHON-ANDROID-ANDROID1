@@ -54,6 +54,7 @@ class HomeActivity : ComponentActivity() {
                 BottomNaviType.HOME -> HomeScreen(modifier = Modifier.weight(1f))
                 BottomNaviType.COMMUNITY -> CommunityScreen(modifier = Modifier.weight(1f))
                 BottomNaviType.PROFILE -> ProfileScreen(modifier = Modifier.weight(1f))
+                else -> {}
             }
 
             BottomNavi(

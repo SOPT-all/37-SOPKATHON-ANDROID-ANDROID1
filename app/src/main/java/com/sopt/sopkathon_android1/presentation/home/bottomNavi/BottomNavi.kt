@@ -29,7 +29,7 @@ import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
 import com.sopt.sopkathon_android1.core.util.noRippleClickable
 
 enum class BottomNaviType {
-    HOME, COMMUNITY, PROFILE
+    HOME, COMMUNITY, HI, PROFILE
 }
 
 @Composable
@@ -101,6 +101,35 @@ fun BottomNavi(
                 style = SopkathonTheme.typography.descriptionMedium10,
                 color = if (selectedItem == BottomNaviType.COMMUNITY) SopkathonTheme.colors.blue_500
                         else SopkathonTheme.colors.gray_500
+            )
+        }
+
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight()
+                .noRippleClickable {
+                    selectedItem = BottomNaviType.HI
+                    communityOnClick()
+                },
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.icon_plus),
+                tint = if (selectedItem == BottomNaviType.HI) SopkathonTheme.colors.blue_500
+                else SopkathonTheme.colors.gray_500,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
+            )
+
+            Spacer(Modifier.height(8.dp))
+
+            Text(
+                text = "주제 생성",
+                style = SopkathonTheme.typography.descriptionMedium10,
+                color = if (selectedItem == BottomNaviType.HI) SopkathonTheme.colors.blue_500
+                else SopkathonTheme.colors.gray_500
             )
         }
 

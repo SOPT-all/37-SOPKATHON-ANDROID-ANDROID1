@@ -369,7 +369,7 @@ class DetailActivity : ComponentActivity() {
                             Spacer(Modifier.width(8.dp))
 
                             Text(
-                                text = "${calculateMinutesAgo(commentInfo.createdAt)}분 전",
+                                text = "10분 전",
                                 style = SopkathonTheme.typography.descriptionMedium10,
                                 color = SopkathonTheme.colors.gray_600
                             )
@@ -413,7 +413,7 @@ class DetailActivity : ComponentActivity() {
                             Spacer(Modifier.width(8.dp))
 
                             Text(
-                                text = "${calculateMinutesAgo(commentInfo.createdAt)}분 전",
+                                text = "10분 전",
                                 style = SopkathonTheme.typography.descriptionMedium10,
                                 color = SopkathonTheme.colors.gray_600
                             )

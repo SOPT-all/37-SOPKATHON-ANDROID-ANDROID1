@@ -28,6 +28,7 @@ import com.sopt.sopkathon_android1.presentation.profile.component.ProfileCard
 import VoteResultComponent
 import ResultStatus
 import kotlinx.coroutines.delay
+import androidx.compose.foundation.layout.statusBarsPadding
 
 @Composable
 fun ProfileScreen(
@@ -44,6 +45,7 @@ fun ProfileScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .statusBarsPadding()
             .background(SopkathonTheme.colors.gray_100)
             .verticalScroll(rememberScrollState())
     ) {

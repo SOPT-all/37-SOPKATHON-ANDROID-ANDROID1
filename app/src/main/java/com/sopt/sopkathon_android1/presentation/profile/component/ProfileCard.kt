@@ -69,7 +69,7 @@ fun ProfileCard(
                     style = SopkathonTheme.typography.descriptionMedium12
                 )
                 Text(
-                    text = "13",
+                    text = "4",
                     color = SopkathonTheme.colors.blue_500,
                     style = SopkathonTheme.typography.descriptionMedium12
                 )
