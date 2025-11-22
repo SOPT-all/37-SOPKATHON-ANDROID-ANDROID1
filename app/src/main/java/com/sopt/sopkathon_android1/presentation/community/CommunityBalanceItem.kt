@@ -32,12 +32,12 @@ fun CommunityBalanceItem(
     box1: String,
     box2: String,
     modifier: Modifier = Modifier,
-){
-    Column (
+) {
+    Column(
         modifier = modifier
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
-    ){
+    ) {
         CommunityBalanceTitle(
             title = title
         )
@@ -54,12 +54,12 @@ fun CommunityBalanceItem(
 private fun CommunityBalanceTitle(
     title: String,
     modifier: Modifier = Modifier,
-){
-    Row (
+) {
+    Row(
         modifier = modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
-    ){
+    ) {
         Text(
             text = title,
             color = SopkathonTheme.colors.gray_800,
@@ -80,22 +80,22 @@ private fun CommunityBalanceChoose(
     box1: String,
     box2: String,
     modifier: Modifier = Modifier,
-){
+) {
     var selectedIndex by remember { mutableStateOf<Int?>(null) }
     val hasAnySelected = selectedIndex != null
 
-    Row (
+    Row(
         modifier = modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-    ){
+    ) {
         CommunityBalanceItemBox(
             title = box1,
             selected = selectedIndex == 1,
             hasAnySelected = hasAnySelected,
             modifier = Modifier
                 .weight(1f)
-                .clickable{
+                .clickable {
                     selectedIndex = if (selectedIndex == 1) null else 1
                 }
         )
@@ -106,7 +106,7 @@ private fun CommunityBalanceChoose(
             hasAnySelected = hasAnySelected,
             modifier = Modifier
                 .weight(1f)
-                .clickable{
+                .clickable {
                     selectedIndex = if (selectedIndex == 1) null else 1
                 }
         )
@@ -119,7 +119,7 @@ private fun CommunityBalanceItemBox(
     selected: Boolean = false,
     hasAnySelected: Boolean = false,
     modifier: Modifier = Modifier,
-){
+) {
     val itemAlpha = when {
         selected -> 1f
         hasAnySelected -> 0.6f
@@ -135,7 +135,7 @@ private fun CommunityBalanceItemBox(
                 shape = RoundedCornerShape(10.dp)
             )
             .padding(vertical = 16.dp)
-    ){
+    ) {
         Text(
             text = title,
             modifier = Modifier
@@ -151,9 +151,9 @@ private fun CommunityBalanceItemBox(
 @Composable
 private fun SopkathonCommunityTabbarPreview() {
 
-   CommunityBalanceItem(
-       title = "서운한 일이 있었을 때, 어떤 스타일이 더 나아?",
-       box1 = "감정 바로 말하는 스타일",
-       box2 = "감정 말 안하고 쌓아두는 스타일"
-   )
+    CommunityBalanceItem(
+        title = "서운한 일이 있었을 때, 어떤 스타일이 더 나아?",
+        box1 = "감정 바로 말하는 스타일",
+        box2 = "감정 말 안하고 쌓아두는 스타일"
+    )
 }
