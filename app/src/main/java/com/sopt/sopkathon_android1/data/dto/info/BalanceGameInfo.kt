@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BalanceGameInfo (
-    @SerialName("balance_game_id")
-    val balanceGameId: Int,
+    @SerialName("id")
+    val id: Int,
     @SerialName("title")
     val title: String,
     @SerialName("option1Title")
@@ -15,6 +15,8 @@ data class BalanceGameInfo (
     val option2Title: String,
     @SerialName("isLike")
     val isLike: Boolean,
+    @SerialName("likeCount")
+    val likeCount: Int,
     @SerialName("memberOption")
     val memberOption: String,
     @SerialName("option1Total")
