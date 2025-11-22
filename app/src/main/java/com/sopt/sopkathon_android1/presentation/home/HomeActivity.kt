@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
+import com.sopt.sopkathon_android1.presentation.community.CommunityBalanceItem
 import com.sopt.sopkathon_android1.presentation.community.CommunityScreen
 import com.sopt.sopkathon_android1.presentation.home.bottomNavi.BottomNavi
 import com.sopt.sopkathon_android1.presentation.home.bottomNavi.BottomNaviType
@@ -32,7 +33,11 @@ class HomeActivity : ComponentActivity() {
 
         setContent {
             Contents()
+            //var selectedTab by remember { mutableStateOf<String?>(null) }
+
+//            CommunityBalanceItem()
         }
+
     }
 
     @Composable
