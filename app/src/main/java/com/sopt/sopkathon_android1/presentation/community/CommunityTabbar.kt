@@ -30,13 +30,13 @@ fun CommunityTabbar(
     selectedTab: String?,
     onTabSelected: (String) -> Unit,
     modifier: Modifier = Modifier,
-){
-    Row (
+) {
+    Row(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-    ){
+    ) {
         CommunityTabbarItem(
             tabTitle = "연애",
             onClick = { onTabSelected("연애") },
@@ -66,6 +66,7 @@ fun CommunityTabbar(
         )
     }
 }
+
 @Composable
 private fun CommunityTabbarItem(
     tabTitle: String,
@@ -73,8 +74,8 @@ private fun CommunityTabbarItem(
     modifier: Modifier = Modifier,
     selected: Boolean = false,
     boxColor: Color = SopkathonTheme.colors.gray_100,
-){
-    Row (
+) {
+    Row(
         modifier = modifier
             .noRippleClickable(onClick = onClick)
             .border(
@@ -85,7 +86,7 @@ private fun CommunityTabbarItem(
             .padding(horizontal = 14.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(5.dp),
-    ){
+    ) {
         Box(
             modifier = Modifier
                 .size(10.dp)
