@@ -58,4 +58,4 @@ val defaultSopkathonColors = SopkathonColors(
     subPink = SubPink,
 )
 
-val localSopkathonColorsProvider = staticCompositionLocalOf { defaultSopkathonColors }
+val localSopkathonColors = staticCompositionLocalOf { defaultSopkathonColors }
