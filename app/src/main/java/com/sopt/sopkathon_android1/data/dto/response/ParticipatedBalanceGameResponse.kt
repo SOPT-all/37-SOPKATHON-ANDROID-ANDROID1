@@ -9,3 +9,14 @@ data class ParticipatedBalanceGameResponse(
     @SerialName("balanceGames")
     val balanceGameList: List<BalanceGameInfo>
 )
+
+
+
+
+
+
+
+
+
+
+

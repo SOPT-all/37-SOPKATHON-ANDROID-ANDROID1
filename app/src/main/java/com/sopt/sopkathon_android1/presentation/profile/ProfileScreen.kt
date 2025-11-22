@@ -4,10 +4,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -16,6 +22,8 @@ import com.sopt.sopkathon_android1.core.designsystem.component.SopkathonTopappba
 import com.sopt.sopkathon_android1.core.designsystem.theme.SOPKATHONTheme
 import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
 import com.sopt.sopkathon_android1.presentation.profile.component.ProfileCard
+import VoteResultComponent
+import ResultStatus
 
 @Composable
 fun ProfileScreen(
@@ -23,11 +31,17 @@ fun ProfileScreen(
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
     val paddedModifier = Modifier.padding(horizontal = 16.dp)
+    val participatedGames by viewModel.participatedBalanceGames.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.getParticipatedBalanceGames()
+    }
 
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(SopkathonTheme.colors.gray_100)
+            .verticalScroll(rememberScrollState())
     ) {
         SopkathonTopappbar("마이페이지")
 
@@ -42,13 +56,60 @@ fun ProfileScreen(
             style = SopkathonTheme.typography.titleSemiBold16,
             modifier = paddedModifier
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+        ) {
+            participatedGames.forEach { game ->
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 12.dp)
+                ) {
+                    Text(
+                        text = game.title,
+                        style = SopkathonTheme.typography.bodyMedium16,
+                        color = SopkathonTheme.colors.gray_800
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    val option1Won = game.option1Total > game.option2Total
+                    val option2Won = game.option2Total > game.option1Total
+
+                    VoteResultComponent(
+                        option1Title = game.option1Title,
+                        option2Title = game.option2Title,
+                        option1Total = game.option1Total,
+                        option2Total = game.option2Total,
+                        memberOption = game.memberOption,
+                        option1Result = when {
+                            option1Won -> ResultStatus.WIN
+                            option2Won -> ResultStatus.LOSE
+                            else -> ResultStatus.NONE
+                        },
+                        option2Result = when {
+                            option2Won -> ResultStatus.WIN
+                            option1Won -> ResultStatus.LOSE
+                            else -> ResultStatus.NONE
+                        }
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun ProfileScreenPreview() {
-    SOPKATHONTheme{
+    SOPKATHONTheme {
         ProfileScreen()
     }
 }
