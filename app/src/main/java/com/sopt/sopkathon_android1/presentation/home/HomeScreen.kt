@@ -53,16 +53,10 @@ fun HomeScreen(
     val uiState by viewModel.homeUiState.collectAsStateWithLifecycle()
     var remainingText by remember { mutableStateOf("") }
 
-    LaunchedEffect(uiState.todayBalanceGame?.deadline) {
-        if (!uiState.todayBalanceGame?.deadline.isNullOrEmpty()) {
-            while (true) {
-                remainingText = try {
-                    calculateRemainingTime(uiState.todayBalanceGame?.deadline)
-                } catch (e: Exception) {
-                    "시간 정보 오류"
-                }
-                delay(1000L)
-            }
+    LaunchedEffect(uiState.todayBalanceGame.deadline) {
+        while (true) {
+            remainingText = calculateRemainingTime(uiState.todayBalanceGame.deadline)
+            delay(1000L)
         }
     }
 
@@ -133,10 +127,10 @@ fun HomeScreen(
                 Spacer(Modifier.height(12.dp))
 
                 BalanceGameCard(
-                    option1Title = uiState.todayBalanceGame?.option1Title.orEmpty(),
-                    option1Total = uiState.todayBalanceGame?.option1Total ?: 0,
-                    option2Title = uiState.todayBalanceGame?.option2Title.orEmpty(),
-                    option2Total = uiState.todayBalanceGame?.option2Total ?: 0,
+                    option1Title = uiState.todayBalanceGame.option1Title,
+                    option1Total = uiState.todayBalanceGame.option1Total,
+                    option2Title = uiState.todayBalanceGame.option2Title,
+                    option2Total = uiState.todayBalanceGame.option2Total,
                     onClick = {
                         // TODO: API 호출
                     },

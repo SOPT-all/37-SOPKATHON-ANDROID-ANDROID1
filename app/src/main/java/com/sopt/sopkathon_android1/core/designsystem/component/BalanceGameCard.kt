@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,7 +42,7 @@ fun BalanceGameCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var clickStatus by mutableStateOf(false)
+    var clickStatus by remember { mutableStateOf(false) }
     val total = option1Total + option2Total
     val (weight1, weight2) = if (clickStatus && total > 0) {
         option1Total.toFloat() / total to option2Total.toFloat() / total
@@ -52,66 +53,155 @@ fun BalanceGameCard(
     Row(
         modifier = modifier.noRippleClickable(
             onClick = {
-                onClick()
                 clickStatus = true
             },
         ),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-
-        DefaultCard(
-            title = option1Title,
-            modifier = Modifier.weight(animatedWeight1),
-        )
-        DefaultCard(
-            title = option2Title,
-            modifier = Modifier.weight(animatedWeight2),
-        )
+        if (!clickStatus) {
+            DefaultCard(
+                title = option1Title,
+                modifier = Modifier.weight(animatedWeight1),
+            )
+            DefaultCard(
+                title = option2Title,
+                modifier = Modifier.weight(animatedWeight2),
+            )
+        } else {
+            if (option1Total > option2Total) {
+                LeftDominatingCard(
+                    option1Title = option1Title,
+                    option2Title = option2Title,
+                    option1Total = option2Total,
+                    percentage = animatedWeight2,
+                    backgroundColor = SopkathonTheme.colors.blue_500,
+                    textColor = SopkathonTheme.colors.gray_100,
+                )
+            } else {
+                RightDominatingCard(
+                    option1Title = option1Title,
+                    option2Title = option2Title,
+                    option2Total = option2Total,
+                    percentage = animatedWeight2,
+                    backgroundColor = SopkathonTheme.colors.subPink,
+                    textColor = SopkathonTheme.colors.gray_800,
+                )
+            }
+        }
     }
 }
 
 @Composable
-private fun DominatingCard(
-    title: String,
-    total: Int,
+private fun LeftDominatingCard(
+    option1Title: String,
+    option2Title: String,
+    option1Total: Int,
     percentage: Float,
     backgroundColor: Color,
     textColor: Color,
     modifier: Modifier = Modifier,
 ) {
-    Box(
-        modifier = modifier
-            .background(
-                color = backgroundColor,
-                shape = RoundedCornerShape(8.dp),
-            )
-            .height(92.dp),
-        contentAlignment = Alignment.CenterStart,
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Image(
-            painter = painterResource(image_crop),
-            contentDescription = null,
-            modifier = Modifier
-                .padding(start = 75.dp)
-                .requiredHeight(167.dp),
-            contentScale = ContentScale.Crop,
+        Box(
+            modifier = modifier
+                .background(
+                    color = backgroundColor,
+                    shape = RoundedCornerShape(8.dp),
+                )
+                .height(92.dp),
+            contentAlignment = Alignment.CenterStart,
+        ) {
+            Image(
+                painter = painterResource(image_crop),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(start = 75.dp)
+                    .requiredHeight(167.dp),
+                contentScale = ContentScale.Crop,
+            )
+
+            Column(
+                modifier = Modifier
+                    .padding(start = 10.dp),
+            ) {
+                Text(
+                    text = option1Title,
+                    color = textColor,
+                    style = SopkathonTheme.typography.titleSemiBold16,
+                )
+
+                Text(
+                    text = "(${percentage * 100}% / ${option1Total}명)",
+                    color = textColor,
+                    style = SopkathonTheme.typography.bodyMedium16,
+                )
+            }
+        }
+
+        Text(
+            text = option2Title,
+            color = SopkathonTheme.colors.gray_800,
+            style = SopkathonTheme.typography.descriptionMedium12,
+        )
+    }
+}
+
+
+@Composable
+private fun RightDominatingCard(
+    option1Title: String,
+    option2Title: String,
+    option2Total: Int,
+    percentage: Float,
+    backgroundColor: Color,
+    textColor: Color,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Text(
+            text = option1Title,
+            color = SopkathonTheme.colors.gray_100,
+            style = SopkathonTheme.typography.descriptionMedium12,
         )
 
-        Column(
-            modifier = Modifier
-                .padding(start = 10.dp),
+        Box(
+            modifier = modifier
+                .background(
+                    color = backgroundColor,
+                    shape = RoundedCornerShape(8.dp),
+                )
+                .height(92.dp),
+            contentAlignment = Alignment.CenterStart,
         ) {
-            Text(
-                text = title,
-                color = textColor,
-                style = SopkathonTheme.typography.titleSemiBold16,
+            Image(
+                painter = painterResource(image_crop),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(start = 75.dp)
+                    .requiredHeight(167.dp),
+                contentScale = ContentScale.Crop,
             )
 
-            Text(
-                text = "(${percentage * 100}% / ${total}명)",
-                color = textColor,
-                style = SopkathonTheme.typography.bodyMedium16,
-            )
+            Column(
+                modifier = Modifier
+                    .padding(start = 10.dp),
+            ) {
+                Text(
+                    text = option2Title,
+                    color = textColor,
+                    style = SopkathonTheme.typography.titleSemiBold16,
+                )
+
+                Text(
+                    text = "(${percentage * 100}% / ${option2Total}명)",
+                    color = textColor,
+                    style = SopkathonTheme.typography.bodyMedium16,
+                )
+            }
         }
     }
 }
@@ -155,14 +245,15 @@ private fun BalanceGameCardPreview() {
 
 @Preview
 @Composable
-private fun DominatingCardPreview() {
+private fun RightDominatingCardPreview() {
     SOPKATHONTheme {
-        DominatingCard(
-            title = "환승 이별",
-            total = 10,
-            percentage = 0.5f,
+        RightDominatingCard(
+            option1Title = "option1Title",
+            option2Title = "option2Title",
+            option2Total = 400,
+            percentage = 0.4f,
             backgroundColor = SopkathonTheme.colors.subPink,
-            textColor = SopkathonTheme.colors.gray_100,
+            textColor = SopkathonTheme.colors.gray_800,
         )
     }
 }
