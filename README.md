@@ -17,7 +17,7 @@
 | <img src="https://avatars.githubusercontent.com/kimjw2003" width="150dp"  height="150dp"> | <img src="https://avatars.githubusercontent.com/jm991014" width="150dp"  height="150dp"> | <img src="https://avatars.githubusercontent.com/ckals413" width="150dp"  height="150dp"> | <img src="https://avatars.githubusercontent.com/chanmi1125" width="150dp"  height="150dp"> |
 |:-----------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------:|
 |                               [김종우](https://github.com/kimjw2003)                    |                                [김종명](https://github.com/jm991014)                     |                             [임차민](https://github.com/ckals413)                              |                               [박찬미](https://github.com/chanmi1125)                                |
-|                                      홈, 토론                                          |                                         논제 생성                                          |                                내가 참여한 밸런스 리스트, 밸런스 정보                                  |                              광장 (오늘의 핫 밸런스, 시간이 얼마 남지 않은 밸런스)                               |
+|                                      디테일 화면                                          |                                         홈 화면                                          |                                내가 참여한 밸런스 리스트, 밸런스 정보                                  |                              광장 (카테고리별 리스트)                               |
 
 ## 📌 커밋 컨벤션
 
@@ -82,9 +82,13 @@
   <img src="https://github.com/user-attachments/assets/1728146d-6483-4f7c-8733-3f79017036ab" width="500"  height="350">
 
 - ### After
-   <img src=""  width="500"  height="350">
+   <img src="https://github.com/user-attachments/assets/33e6e6cd-d3a6-4214-be04-a4bb0d179283"  width="500"  height="350">
 
 ## 🎥 시연 영상
+
+
+https://github.com/user-attachments/assets/54aaf076-5f44-4a01-a64e-61341f536d1a
+
 
 
 
