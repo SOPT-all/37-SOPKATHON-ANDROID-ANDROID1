@@ -133,7 +133,7 @@ private fun LeftDominatingCard(
                 )
 
                 Text(
-                    text = "(${percentage * 100}% / ${option1Total}명)",
+                    text = "(${(percentage * 100).toInt()}% / ${option1Total}명)",
                     color = textColor,
                     style = SopkathonTheme.typography.bodyMedium16,
                 )
@@ -142,6 +142,15 @@ private fun LeftDominatingCard(
 
         Text(
             text = option2Title,
+            modifier = Modifier
+                .background(
+                    color = SopkathonTheme.colors.subPink,
+                    shape = RoundedCornerShape(8.dp),
+                )
+                .padding(
+                    horizontal = 17.5.dp,
+                    vertical = 38.dp,
+                ),
             color = SopkathonTheme.colors.gray_800,
             style = SopkathonTheme.typography.descriptionMedium12,
         )
@@ -164,6 +173,15 @@ private fun RightDominatingCard(
     ) {
         Text(
             text = option1Title,
+            modifier = Modifier
+                .background(
+                    color = SopkathonTheme.colors.blue_500,
+                    shape = RoundedCornerShape(8.dp),
+                )
+                .padding(
+                    horizontal = 17.5.dp,
+                    vertical = 38.dp,
+                ),
             color = SopkathonTheme.colors.gray_100,
             style = SopkathonTheme.typography.descriptionMedium12,
         )
@@ -181,8 +199,7 @@ private fun RightDominatingCard(
                 painter = painterResource(image_crop),
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(start = 75.dp)
-                    .requiredHeight(167.dp),
+                    .padding(start = 75.dp),
                 contentScale = ContentScale.Crop,
             )
 
@@ -197,7 +214,7 @@ private fun RightDominatingCard(
                 )
 
                 Text(
-                    text = "(${percentage * 100}% / ${option2Total}명)",
+                    text = "(${(percentage * 100).toInt()}% / ${option2Total}명)",
                     color = textColor,
                     style = SopkathonTheme.typography.bodyMedium16,
                 )
