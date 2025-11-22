@@ -17,22 +17,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.dropShadow
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.sopkathon_android1.R
+import com.sopt.sopkathon_android1.core.designsystem.theme.SOPKATHONTheme
 import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
 import com.sopt.sopkathon_android1.core.util.noRippleClickable
 
 enum class BottomNaviType {
-    HOME, COMMUNITY, GENERATE, PROFILE
+    HOME, COMMUNITY, PROFILE
 }
 
 @Composable
 fun BottomNavi(
     homeOnClick: () -> Unit,
     communityOnClick: () -> Unit,
-    generateOnClick: () -> Unit,
     profileOnClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -106,35 +109,6 @@ fun BottomNavi(
                 .weight(1f)
                 .fillMaxHeight()
                 .noRippleClickable {
-                    selectedItem = BottomNaviType.GENERATE
-                    generateOnClick()
-                },
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Icon(
-                painter = painterResource(R.drawable.icon_plus),
-                tint = if (selectedItem == BottomNaviType.GENERATE) SopkathonTheme.colors.blue_500
-                        else SopkathonTheme.colors.gray_500,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-
-            Spacer(Modifier.height(8.dp))
-
-            Text(
-                text = "주제 생성",
-                style = SopkathonTheme.typography.descriptionMedium10,
-                color = if (selectedItem == BottomNaviType.GENERATE) SopkathonTheme.colors.blue_500
-                        else SopkathonTheme.colors.gray_500,
-            )
-        }
-
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-                .noRippleClickable {
                     selectedItem = BottomNaviType.PROFILE
                     profileOnClick()
                 },
@@ -158,5 +132,18 @@ fun BottomNavi(
                         else SopkathonTheme.colors.gray_500,
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun BottomNaviPreview() {
+    SOPKATHONTheme {
+        BottomNavi(
+            homeOnClick = {},
+            communityOnClick = {},
+            profileOnClick = {},
+            modifier = Modifier
+        )
     }
 }

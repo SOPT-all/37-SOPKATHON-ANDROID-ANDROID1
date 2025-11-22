@@ -14,26 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme._37SOPKATHONANDROIDANDROID1">
         <activity
-            android:name=".presentation.splash.SplashActivity"
+            android:name=".presentation.home.HomeActivity"
             android:exported="true"
-            android:label="@string/title_activity_splash"
+            android:label="@string/title_activity_home"
             android:theme="@style/Theme._37SOPKATHONANDROIDANDROID1" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".presentation.home.HomeActivity"
-            android:exported="false"
-            android:label="@string/title_activity_home"
-            android:theme="@style/Theme._37SOPKATHONANDROIDANDROID1" />
-        <activity
-            android:name=".presentation.detail.DetailActivity"
-            android:exported="true"
-            android:theme="@style/Theme._37SOPKATHONANDROIDANDROID1" >
-
         </activity>
     </application>
 

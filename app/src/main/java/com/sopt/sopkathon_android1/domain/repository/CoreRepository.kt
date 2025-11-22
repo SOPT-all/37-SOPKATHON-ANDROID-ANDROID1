@@ -13,7 +13,7 @@ import retrofit2.Response
 
 interface CoreRepository {
     suspend fun getTodayBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
-    suspend fun getHotBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
+    suspend fun getHotBalanceGame() : Response<BaseResponse<List<BalanceGameInfo>>>
     suspend fun getParticipatingBalanceGame() : Response<BaseResponse<ParticipatingBalanceGameResponse>>
     suspend fun getBalanceGameInfo(balanceGameId: Int) : Response<BaseResponse<BalanceGameInfo>>
     suspend fun writeComment(balanceGameId: Int, writeCommentRequest: WriteCommentRequest) : Response<Unit>

@@ -21,7 +21,7 @@ interface CoreService {
     suspend fun getTodayBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
 
     @GET("api/v1/balance-games/hot")
-    suspend fun getHotBalanceGame() : Response<BaseResponse<BalanceGameInfo>>
+    suspend fun getHotBalanceGame() : Response<BaseResponse<List<BalanceGameInfo>>>
 
     @GET("api/v1/balance-games/current-participants")
     suspend fun getParticipatingBalanceGame() : Response<BaseResponse<ParticipatingBalanceGameResponse>>

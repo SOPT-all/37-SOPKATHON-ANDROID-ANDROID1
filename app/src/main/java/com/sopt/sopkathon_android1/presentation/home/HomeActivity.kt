@@ -18,8 +18,6 @@ import androidx.compose.ui.Modifier
 import com.sopt.sopkathon_android1.core.designsystem.theme.SopkathonTheme
 import com.sopt.sopkathon_android1.presentation.community.CommunityBalanceItem
 import com.sopt.sopkathon_android1.presentation.community.CommunityScreen
-import com.sopt.sopkathon_android1.presentation.community.CommunityTabbar
-import com.sopt.sopkathon_android1.presentation.generate.GenerateScreen
 import com.sopt.sopkathon_android1.presentation.home.bottomNavi.BottomNavi
 import com.sopt.sopkathon_android1.presentation.home.bottomNavi.BottomNaviType
 import com.sopt.sopkathon_android1.presentation.profile.ProfileScreen
@@ -55,14 +53,12 @@ class HomeActivity : ComponentActivity() {
             when(selectedScreen) {
                 BottomNaviType.HOME -> HomeScreen(modifier = Modifier.weight(1f))
                 BottomNaviType.COMMUNITY -> CommunityScreen(modifier = Modifier.weight(1f))
-                BottomNaviType.GENERATE -> GenerateScreen(modifier = Modifier.weight(1f))
                 BottomNaviType.PROFILE -> ProfileScreen(modifier = Modifier.weight(1f))
             }
 
             BottomNavi(
                 homeOnClick = { selectedScreen = BottomNaviType.HOME },
                 communityOnClick = { selectedScreen = BottomNaviType.COMMUNITY },
-                generateOnClick = { selectedScreen = BottomNaviType.GENERATE },
                 profileOnClick = { selectedScreen = BottomNaviType.PROFILE }
             )
         }

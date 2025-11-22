@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ParticipatedBalanceGameResponse(
-    @SerialName("balanceGameList")
+    @SerialName("balanceGames")
     val balanceGameList: List<BalanceGameInfo>
 )
