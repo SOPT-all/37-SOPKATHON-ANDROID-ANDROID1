@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.sopkathon_android1.data.dto.info.BalanceGameInfo
 import com.sopt.sopkathon_android1.data.dto.info.CommentInfo
 import com.sopt.sopkathon_android1.data.dto.request.LikeRequest
+import com.sopt.sopkathon_android1.data.dto.request.VoteBalanceGameRequest
 import com.sopt.sopkathon_android1.data.dto.request.WriteCommentRequest
 import com.sopt.sopkathon_android1.domain.repository.CoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -63,5 +64,10 @@ class DetailViewModel @Inject constructor(
         if(result.isSuccessful) {
             _writeCommentSuccess.emit(true)
         }
+    }
+
+    fun voteBalanceGame(balanceGameId: Int, index: Int) = viewModelScope.launch {
+        val option = if(index == 0) "OPTION1" else "OPTION2"
+        coreRepository.voteBalanceGame(balanceGameId, voteBalanceGameRequest = VoteBalanceGameRequest(option))
     }
 }

@@ -69,7 +69,7 @@ private fun CommunityBalanceTitle(
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.icon_arrow_right),
             contentDescription = null,
-            tint = SopkathonTheme.colors.blue_500,
+            tint = SopkathonTheme.colors.gray_800,
         )
     }
 
